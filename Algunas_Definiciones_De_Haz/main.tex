@@ -55,6 +55,7 @@
 {5 cm} %altura del pie de página
 {1 cm} %espacio entre el texto y el pie de página
 
+\setlength{\parindent}{0pt} %Quita la sangría al iniciar los párrafos
 \addtolength{\skip\footins}{2pc}
 
 %\pagenumbering{gobble} %Quita la numeración de las páginas
@@ -90,12 +91,13 @@
    \input{title.tex}
    \vspace{1cm}
 
-   %\begin{abstract}
-    %  \input{abstract}
+   \begin{abstract}
+      \input{abstract}
      %   
       %\vspace{0.3cm}
       %\textsc{Palabras Clave.} Haz; espacio étalé; prehaz; homeomorfismo local; manojo; hacificación; equivalencia de categorías; local vs global.
-   %\end{abstract}
+   \end{abstract}
+   \vspace{1cm}
 
    La Definición \ref{def:Godement} es debida a \cite[p.~109]{TATF}. 
 
@@ -130,6 +132,92 @@
       \input{Diag1.tex}
    donde $e,\pi_1$ y $\pi_2$ son las respectivas funciones canónicas.
    \end{Def}
+   
+   Ahora queremos probar que las definiciones ${\text{haz}}_1$, ${\text{haz}}_2$ y ${\text{haz}}_3$ son equivalentes. Para ello damos primero un par de lemas. El primero de ellos nos dice que en la anterior definición todo prehaz cumple $\pi _1\circ e = \pi _2 \circ e$:
+
+   \begin{Lema}\label{Lema:Prehaz}
+      Sea $P$ un prehaz de conjuntos sobre $X$. Para cualquier $U\in \mathcal{O}(X)$ y cualquier cubrimiento abierto $(U_i)_{i\in I}$ de $U$ se tiene $\pi_1\circ e=\pi_2\circ e$, donde $e$, $\pi_1$ y $\pi_2$ son las respectivas funciones canónicas.
+   \end{Lema}
+
+   \begin{proof}
+      Sea $s\in PU$. Tenemos
+      $$
+      \begin{aligned}
+         (\pi_1\circ e)(s) &= \pi_1(e(s)) \\
+                           &= \pi_1 \left(s|^U_{U_i}\right)_{i\in I} \\
+                           &= \left(\left(s|^U_{U_i}\right)|^{U_i}_{U_i\cap U_j}\right)_{\left(i,j\right)\in I\times I}
+      \end{aligned}
+      $$
+      y
+      $$
+      \begin{aligned}
+         (\pi_2\circ e)(s) &= \pi_2(e(s)) \\
+                           &= \pi_2 \left(s|^U_{U_i}\right)_{i\in I} \\
+                           &= \left(\left(s|^U_{U_j}\right)|^{U_j}_{U_i\cap U_j}\right)_{\left(i,j\right)\in I\times I}
+      \end{aligned}
+      $$
+   Para cualesquiera $i,j\in I$ tenemos en $\mathcal{O}(X)$ el diagrama\\ 
+   \input{Diag2.tex}
+   de modo que en $\Set$ tenemos el diagrama\\
+   \input{Diag3.tex}
+   Como $s\in PU$, siguiendo el diagrama tenemos
+   $$
+   \left(s|^U_{U_i}\right)|^{U_i}_{U_i \cap U_j}=s|^U_{U_i\cap U_j}=\left(s|^U_{U_j}\right)|^{U_j}_{U_i\cap U_j}.
+   $$
+   Por lo tanto $(\pi_1\circ e)(s)=(\pi_2\circ e)(s)$. Obtenemos $\pi_1\circ e=\pi_2\circ e$.
+   \end{proof}
+
+   \begin{Lema}\label{Lema:Igualadores2}
+      Supongamos que en \normalfont{\textbf{Set}} el siguiente es un diagrama igualador:
+      \input{Diag4.tex}
+      Entonces, para todo $a\in A$ tal que $f(a)=g(a)$, existe $\alpha\in E$ tal que $e(\alpha)=a$.
+   \end{Lema}
+   \begin{proof}
+      Definimos $F:=\left\lbrace x\in A\mid f(x)=g(x)\right\rbrace (\subseteq A)$. Se tiene que $(F,\normalfont{in}_{F,A})$ (donde $\normalfont{in}_{F,A}$ es la función inclusión de $F$ en $A$), es un igualador de $f$ y $g$, con lo cual, existe una única flecha $v:F\to E$ tal que $e\circ v=\normalfont{in}_{F,A}$. Como $a\in F$, tenemos $\alpha:=v(a)\in E$ y $e(\alpha)=e(v(a))=\normalfont{in}_{F,A}(a)=a$. 
+
+   \end{proof}
+
+   \begin{Prop}
+      Las definiciones ${\text{haz}}_1$, ${\text{haz}}_2$ y ${\text{haz}}_3$ son equivalentes. 
+   \end{Prop}
+
+   \begin{proof}\footnote{A lo largo de la prueba, si $U$ y $V\subseteq U$ son subconjuntos abiertos, $\mathscr{F}$ es un prehaz y $s\in \mathscr{F}U$, entonces denotamos por $\left.s\right|^U_{V}$ a la imagen de $s$ por la aplicación $\mathscr{F}U\to\mathscr{F}V$.}
+      \begin{itemize}
+         \item[$\bullet$](${\text{haz}}_1\Rightarrow {\text{haz}}_2$) Todo ${\text{haz}}_1$ es un ${\text{haz}}_2$ por la observación realizada anteriormente (\textit{(F1)} garantiza la unicidad en \textit{(F2)}).
+         \item[$\bullet$](${\text{haz}}_2\Rightarrow {\text{haz}}_3$) Supongamos que $\mathscr{F}$ es un ${\text{haz}}_2$. Sean $U\in \mathcal{O}(X)$ y $\left(U_i\right)_{i\in I}$ un cubrimiento abierto de $U$. Veamos que el siguiente diagrama en $\Set$ es un igualador:
+            \input{Diag5.tex}
+            Por el Lema \ref{Lema:Prehaz} tenemos que $\pi_1\circ e=\pi_2\circ e$. Supongamos que existen $A\in \Set$ y $u:A\to \prod_{i\in I}\mathscr{F}U_i$ en $\Set$ tales que $\pi_1\circ u=\pi_2\circ u$.
+            \input{Diag6.tex}
+            Dado $t\in A$ tenemos $u(t)\ in \prod_{i\in I}\mathscr{F}U_i$, así que $u(t)$ es de la forma $(t_i)_{i\in I}$ con $t_i \in \mathscr{F}U_i$ para todo $i\in I$. Como
+            $$
+            (\pi_1\circ u)(t)=\pi_1(u(t))=\pi_1\left( \left( t_i\right)_{i\in I}\right)=\left( t_i|^{U_i}_{U_i\cap U_j}\right)_{(i,j)\in I\times I},
+            $$
+            $$  
+               (\pi_2\circ u)(t)=\pi_2(u(t))=\pi_2\left( \left( t_i\right)_{i\in I}\right)=\left( t_j|^{U_j}_{U_i\cap U_j}\right)_{(i,j)\in I\times I}
+            $$
+            y $\pi_1\circ u=\pi_2\circ u$, entonces $t_i|^{U_i}_{U_i\cap U_j} = t_j|^{U_j}_{U_i\cap U_j}$ para cualesquiera $i,j\in I$. De este modo, por la definición de ${\text{haz}}_2$ existe un único $s_t\in \mathscr{F}U$ tal que $\left. s_t\right|^U_{U_i}=t_i$ para todo $i\in I$. Definimos $v:A\to \mathscr{F}(U):t\mapsto s_t$. Con lo anterior, para todo $t\in A$ se tiene
+            $$
+               (e\circ v)(t)=e(v(t))=e(s_t)=\left( \left. s_t\right|^U_{U_i}\right)_{i\in I}=\left( t_i\right)_{i\in I}=u(t),
+            $$
+            luego $e\circ v=u$. Si $w:A\to \mathscr{F}(U)$ es tal que $e\circ w=u$ entonces dado $t\in A$ se tiene
+            $$
+               \left( t_i\right)_{i\in I}=u(t)=(e\circ w)(t)=e(w(t))=\left( \left.w(t)\right|^U_{U_i}\right)_{i\in I},
+            $$
+            luego $\left.w(t)\right|^U_{U_i}=t_i$ para todo $i\in I$; por la unicidad de $s_t$ se tiene $w(t)=s_t=v(t)$. Por tanto $w=v$ , con lo cual $v$ es la única función de $A$ en $\mathscr{F}U$ tal que $e\circ v=u$. De lo anterior,
+            \input{Diag5.tex}
+            es un diagrama igualador y por tanto $\mathscr{F}$ es un ${\text{haz}}_3$.
+         \item[$\bullet$](${\text{haz}}_3\Rightarrow {\text{haz}}_1$) Sea $\mathscr{F}$ un ${\text{haz}}_3$.
+            \begin{itemize}
+               \item[\textit(F1)] Sean $U\in \mathcal{O}(X)$, $\left( U_i\right)_{i\in I}$ un cubrimiento abierto de $U$ y $s',s''\in \mathscr{F}U$ tales que $\left.s'\right|^U_{U_i}=\left.s''\right|^U_{U_i}$ para todo $i\in I$. Tenemos que el siguiente diagrama es un igualador:
+                  \input{Diag5.tex}
+                  Además $e(s')=\left( \left. s'\right|^U_{U_i}\right)_{i\in I}=\left( \left. s''\right|^U_{U_i}\right)_{i\in I}=e(s'')$. Como en $\Set$ todo igualador es en particular una función inyectiva, se sigue que $s'=s''$.
+               \item[\textit(F2)] Sean $U\in \mathcal{O}(X)$, $\left( U_i\right)_{i\in I}$ un cubrimiento abierto de $U$ y $\left( s_i\right)_{i\in I}$ una colección con $s_i\in \mathscr{F}(U_i)$ para todo $i\in I$, tal que $\left. s_i\right|^{U_i}_{U_i \cap U_j}=\left.s_j\right|^{U_j}_{U_i\cap U_j}$ para cualesquiera $i,j\in I$. Tenemos que el siguiente diagrama es un igualador:
+                  \input{Diag5.tex}
+                  Notemos que $\pi_1\left( \left( s_i\right)_{i\in I}\right)=\left( s_i|^{U_i}_{U_i\cap U_j}\right)_{(i,j)\in I\times I}=\left( s_j|^{U_j}_{U_i\cap U_j}\right)_{(i,j)\in I\times I}=\pi_2\left( \left( s_i\right)_{i\in I}\right)$ con $\left( s_i\right)_{i\in I}\in \prod_{i\in I}\mathscr{F}U_i$. Por el Lema \ref{Lema:Igualadores2}, existe $s\in \mathscr{F}U$ tal que $\left( s_i\right)_{i\in I}=e(s)=\left( \left.s\right|^U_{U_i}\right)_{i\in I}$, es decir, $\left.s\right|^U_{U_i}=s_i$ para todo $i\in I$. Por tanto $\mathscr{F}$ es un ${\text{haz}}_1$.
+
+            \end{itemize}
+      \end{itemize}
+   \end{proof}
 
    \newpage
    \nocite{*}
